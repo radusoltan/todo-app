@@ -1,0 +1,348 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RESTful API service for a TODO list app",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "RESTful API service for a TODO list app"
+        }
+    ],
+    "paths": {
+        "/todos": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Display a listing of the Todos",
+                "operationId": "todosAll",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Create new todo record",
+                "operationId": "todoCreate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoShowRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoShowRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/todo/{todo}": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Get todo by ID",
+                "operationId": "todoGet",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "The ID of todo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Delete TODO",
+                "operationId": "deleteTodo",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Update tod by ID",
+                "operationId": "todoUpdate",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoShowRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/todo/{todo}/complete": {
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Set TODO as completed",
+                "operationId": "todoSetCompleted",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoShowRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/todo/{todo}/incomplete": {
+            "post": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Set TODO as incompleted",
+                "operationId": "todoSetInompleted",
+                "parameters": [
+                    {
+                        "name": "todo",
+                        "in": "path",
+                        "description": "The ID of example",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TodoStoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TodoShowRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/todos/completed": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Get list of completed Toodos",
+                "operationId": "todoGetCompleted",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/todos/incompleted": {
+            "get": {
+                "tags": [
+                    "Todos"
+                ],
+                "summary": "Get list of incompleted Toodos",
+                "operationId": "todoGetInompleted",
+                "responses": {
+                    "200": {
+                        "description": "Everything is fine",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TodoShowRequest": {
+                "title": "Todo showing request",
+                "description": "Some simple request createa as tod",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "Unique ID",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "description": "Name of key for storring",
+                        "type": "string",
+                        "example": "New Todo"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Value for storring",
+                        "type": "string",
+                        "example": "New Todo description"
+                    },
+                    "is_completed": {
+                        "title": "Is Completed",
+                        "description": "Show if Todo is Completed",
+                        "type": "boolean",
+                        "example": "false"
+                    }
+                },
+                "type": "object"
+            },
+            "TodoStoreRequest": {
+                "title": "Todo storring request",
+                "description": "Some simple request createa as todo",
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "description": "Name of key for storring",
+                        "type": "string",
+                        "example": "New Todo"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Value for storring",
+                        "type": "string",
+                        "example": "New Todo description"
+                    },
+                    "is_completed": {
+                        "title": "Is Completed",
+                        "description": "Show if Todo is completed",
+                        "type": "boolean",
+                        "example": "false"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Todos",
+            "description": "Todo app"
+        }
+    ]
+}
